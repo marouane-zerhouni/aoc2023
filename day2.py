@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import re
 
+=======
+>>>>>>> 68a6e5183d43f6120b4ae9400f87e371cdf6308b
 def day2data(filename: str) -> list:
     with open(filename) as text_input:
         input_list = text_input.read().strip().split("\n")
@@ -8,6 +11,7 @@ def day2data(filename: str) -> list:
 
 day2puzzle = day2data("day2input")
 
+<<<<<<< HEAD
 def firststar(puzzle_input: list) -> int:
 
     class impossible_line(Exception): pass
@@ -43,3 +47,6 @@ def firststar(puzzle_input: list) -> int:
     return max_score
 
 firststar(day2puzzle)
+=======
+print(day2puzzle)
+>>>>>>> 68a6e5183d43f6120b4ae9400f87e371cdf6308b
