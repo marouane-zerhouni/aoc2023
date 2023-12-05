@@ -6,14 +6,13 @@ def day1data(filename: str) -> list:
         input_list = list(map(str, input_list))
         return input_list
 
-
 day1puzzle = day1data("day1input")
 
 def firststar(calibration_doc: list) -> int:
     digits_list = []
     for line in calibration_doc:
-        digits_in_line = [char for char in line if char in '0123456789']
-        digits_list.append(''.join(digits_in_line[0] + digits_in_line[len(digits_in_line) - 1]))
+        digits_in_line = [char for char in line if char.isnumeric()]
+        digits_list.append(''.join(digits_in_line[0] + digits_in_line[-1]))
     digits_list = [int(i) for i in digits_list]
     return sum(digits_list)
 
@@ -21,14 +20,14 @@ firststar(day1puzzle)
 
 def secondstar(calibration_doc: list) -> int:
     digit_list = []
+    corrections = {('one', 'o1e'), ('two', 't2o'), ('three', 't3e'), ('four', 'f4r'), ('five', 'f5e'), ('six', 's6x'), ('seven', 's7n'), ('eight', 'e8t'), ('nine', 'n9e')}
     for line in calibration_doc:
-        corrections = OrderedDict([('one', '1'), ('two', '2'), ('three', '3'), ('four', '4'), ('five', '5'), ('six', '6'), ('seven', '7'), ('eight', '8'), ('nine', '9')])
-        for x,y in corrections.items():
-            line = line.replace(x,y)
-        digits_in_line = [char for char in line if char in '0123456789']
-        digit_list.append(''.join(digits_in_line[0] + digits_in_line[len(digits_in_line) - 1]))
-    print(digit_list)
+            for written_no, garbage_attempt in corrections:
+                line = line.replace(written_no, garbage_attempt)
+            digits_in_line = [char for char in line if char.isnumeric()]
+            digit_list.append(''.join(digits_in_line[0] + digits_in_line[-1]))
     digit_list = [int(i) for i in digit_list]
     return sum(digit_list)
 
+            
 print(secondstar(day1puzzle))
