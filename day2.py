@@ -9,24 +9,16 @@ def day2data(filename: str) -> list:
 day2puzzle = day2data("day2input")
 
 def firststar(puzzle_input: list) -> int:
-
     class impossible_line(Exception): pass
-    games_results = {}
-    max_score = 5050
-    max_red = 12
-    max_green = 13
-    max_blue = 14
-    red = re.compile(r"\d+\sred", re.IGNORECASE)
-    green = re.compile(r"\d+\sgreen", re.IGNORECASE)
-    blue = re.compile(r"\d+\sblue", re.IGNORECASE)
-
+    max_score = 5050 
+    RGB = [re.compile(r"\d+\sred"), re.compile(r"\d+\sgreen"), re.compile(r"\d+\sblue")]
+    max_RGB = [12, 13, 14]
     for line in puzzle_input:
         game_id = line[line.find('Game ')+5 : line.find(':')]
-        sets_reveal = line[line.find(': ')+2:]
-        sets_reveal = list(sets_reveal.split(';'))
+        sets_reveal = list((line[line.find(': ')+2:]).split(';'))
         try:
             for set in sets_reveal:
-                for i,j in zip([red, green, blue], [max_red, max_green, max_blue]):
+                for i,j in zip(RGB, max_RGB):
                     colour_result = re.search(i, set)
                     if not colour_result == None:
                         colour_result = colour_result.group()
